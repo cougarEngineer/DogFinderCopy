@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1070682264057",
+    "firebase_url": "https://dog-finder-35471.firebaseio.com",
+    "project_id": "dog-finder-35471",
+    "storage_bucket": "dog-finder-35471.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070682264057:android:0a624a02c0e11302c4ed28",
+        "android_client_info": {
+          "package_name": "com.example.dogfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070682264057-g5hfbbo1ee7f2uu0lj9lsf367pl7hp9k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dogfinder",
+            "certificate_hash": "45bf5ba885948aa5e516af8b7fe7af9aa8a6297a"
+          }
+        },
+        {
+          "client_id": "1070682264057-uroha5f650gp1gsopkp29p7l22mtcofv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5CQ6AFnrCHNfBTOeVWw5cEl1zr9z6TH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070682264057-uroha5f650gp1gsopkp29p7l22mtcofv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
