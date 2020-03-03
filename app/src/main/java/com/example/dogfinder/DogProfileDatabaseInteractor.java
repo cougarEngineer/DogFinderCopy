@@ -60,7 +60,11 @@ db.collection("profiles")
      */
     //temp
     public List<DogProfile> get() {
-        return new ArrayList<>();
+        List<DogProfile> list = new ArrayList<>();
+        DogProfile temp = new DogProfile();
+        temp.setName("Fido");
+        list.add(temp);
+        return list;
     }
     public void add(DogProfile dp){
 
