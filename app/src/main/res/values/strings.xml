@@ -4,4 +4,10 @@
     <string name="title_activity_add">AddActivity</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_show_profile">ShowProfileActivity</string>
+    <string name="username">Username</string>
+    <string name="sign_in">Sign In</string>
+    <string name="dog_profile_list">Dog Profile List</string>
+    <string name="dog_picture">Dog Picture</string>
+    <string name="name">Name</string>
+    <string name="location">Location</string>
 </resources>

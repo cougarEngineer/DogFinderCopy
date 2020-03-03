@@ -8,4 +8,39 @@
     tools:context=".ListActivity"
     tools:showIn="@layout/activity_list">
 
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="673dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/pictureList"
+            android:layout_width="5dp"
+            android:layout_height="110dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:baselineAligned="false"
+            android:contentDescription="@string/dog_picture"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/nameList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_weight="1"
+            android:baselineAligned="false"
+            android:text="@string/name" />
+
+        <TextView
+            android:id="@+id/locationList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_weight="1"
+            android:baselineAligned="false"
+            android:text="@string/location" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
