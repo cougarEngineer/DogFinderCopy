@@ -8,39 +8,43 @@
     tools:context=".ListActivity"
     tools:showIn="@layout/activity_list">
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="673dp"
-        android:orientation="horizontal"
+    <ListView
+        android:id="@+id/profileList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/filterLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/pictureList"
-            android:layout_width="5dp"
-            android:layout_height="110dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:baselineAligned="false"
-            android:contentDescription="@string/dog_picture"
-            tools:srcCompat="@tools:sample/avatars" />
+    <LinearLayout
+        android:id="@+id/filterLayout"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/nameList"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_weight="1"
-            android:baselineAligned="false"
-            android:text="@string/name" />
+        <Spinner
+            android:id="@+id/stateSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/locationList"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_weight="1"
-            android:baselineAligned="false"
-            android:text="@string/location" />
+        <Spinner
+            android:id="@+id/citySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/filterButton"
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:text="@string/filter_button_text"
+            android:textSize="12sp" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

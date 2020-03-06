@@ -10,4 +10,5 @@
     <string name="dog_picture">Dog Picture</string>
     <string name="name">Name</string>
     <string name="location">Location</string>
+    <string name="filter_button_text">Filter</string>
 </resources>

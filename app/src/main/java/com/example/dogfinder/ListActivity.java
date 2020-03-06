@@ -1,31 +1,63 @@
 package com.example.dogfinder;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
+
+    private List<DogProfile> dogProfiles;
+    private boolean dataReady = false;
+    private List<DogProfile> filteredDogProfiles;
+
+    private DogProfileDatabaseInteractor dpdi = new DogProfileDatabaseInteractor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        Log.d(this.toString(), "starting retrieval");
+        new getDataTask().execute(); //get all data with getDataTask (below)
+
+        //TODO: Brigham, you should be able to hook up your listviewadapter to filteredDogProfiles here
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    //will populate dropdowns with relevant location data
+    private void populateDrop() {
+        /* TODO: Michael */
+    }
+
+    //will change filteredDogProfiles to exclude those filtered out
+    private void onClickFilterButton() {
+        //todo: michael
+    }
+
+    //AsyncTask to get the data from DogProfileDatabaseInteractor
+    private class getDataTask extends AsyncTask<Void, Void, List<DogProfile>> {
+
+        @Override
+        protected List<DogProfile> doInBackground(Void... voids) {
+            return dpdi.get();
         }
 
+        @Override
+        protected void onPostExecute(List<DogProfile> dp) {
+            super.onPostExecute(dogProfiles);
+            dogProfiles = dp;
+            filteredDogProfiles = dogProfiles;
+            Log.d(this.toString(), "DogProfiles retrieved");
+            populateDrop();
+        }
+    }
         /*
         //These notes below can be deleted - notes to self for testing.
 
@@ -48,6 +80,5 @@ public class ListActivity extends AppCompatActivity {
         );
         */
 
-    }
 
 }
