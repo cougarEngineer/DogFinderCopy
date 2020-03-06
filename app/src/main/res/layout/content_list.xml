@@ -43,6 +43,7 @@
             android:layout_width="72dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
+            android:onClick="onClickFilterButton"
             android:text="@string/filter_button_text"
             android:textSize="12sp" />
     </LinearLayout>

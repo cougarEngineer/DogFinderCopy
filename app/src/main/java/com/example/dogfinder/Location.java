@@ -1,9 +1,9 @@
 package com.example.dogfinder;
 
 public class Location {
-    private String state;
-    private String city;
-    private String local;
+    private String state = "";
+    private String city = "";
+    private String local = "";
 
     public String getState() {
         return state;
