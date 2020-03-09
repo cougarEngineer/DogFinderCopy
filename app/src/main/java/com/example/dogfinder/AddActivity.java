@@ -1,21 +1,27 @@
 package com.example.dogfinder;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class AddActivity extends AppCompatActivity {
 
     EditText name, picture, height, weight, info, city, state, address, contact;
     Spinner breed, color;
     Button create, cancel;
+    static final String USERNAME = "username";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,22 +54,49 @@ public class AddActivity extends AppCompatActivity {
                 String weightS = weight.getText().toString();
                 String infoS = info.getText().toString();
                 String cityS = city.getText().toString();
+                String stateS = state.getText().toString();
                 String addressS = address.getText().toString();
                 String contactS = contact.getText().toString();
                 String breedS = breed.getSelectedItem().toString();
                 String colorS = color.getSelectedItem().toString();
 
-                Intent intent = new Intent(AddActivity.this, ShowProfileActivity.class);
-                intent.putExtra("name", nameS);
-                intent.putExtra("height",heightS);
-                intent.putExtra("weight",weightS);
-                intent.putExtra("info",infoS);
-                intent.putExtra("city",cityS);
-                intent.putExtra("address",addressS);
-                intent.putExtra("contact",contactS);
-                intent.putExtra("breed",breedS);
-                intent.putExtra("color",colorS);
-                startActivity(intent);
+//                Intent intent = new Intent(AddActivity.this, ShowProfileActivity.class);
+//                intent.putExtra("name", nameS);
+//                intent.putExtra("height",heightS);
+//                intent.putExtra("weight",weightS);
+//                intent.putExtra("info",infoS);
+//                intent.putExtra("city",cityS);
+//                intent.putExtra("address",addressS);
+//                intent.putExtra("contact",contactS);
+//                intent.putExtra("breed",breedS);
+//                intent.putExtra("color",colorS);
+//                startActivity(intent);
+
+                DogProfile profile = new DogProfile();
+                SharedPreferences mPrefs = getDefaultSharedPreferences(getApplicationContext());
+                String curUser = mPrefs.getString(USERNAME, "");
+                User user = new User();
+                user.setToken(curUser);
+                profile.setUser(user);
+                profile.setName(nameS);
+                profile.setHeight(Integer.parseInt(heightS));
+                profile.setWeight(Integer.parseInt(weightS));
+                profile.setOther(infoS);
+                Location location = new Location();
+                location.setCity(cityS);
+                location.setState(stateS);
+                location.setLocal(addressS);
+                profile.setLocation(location);
+                ContactInfo contactInfo = new ContactInfo();
+                contactInfo.setUser(user);
+                contactInfo.setPhone(contactS);
+                profile.setContact(contactInfo);
+                profile.setBreed((Breed) breed.getSelectedItem());
+                profile.setColor((Color) color.getSelectedItem());
+                new DogProfileDatabaseInteractor().add(profile);
+
+                Toast.makeText(getApplicationContext(), "Dog added" ,Toast.LENGTH_SHORT).show();
+
                 //****************************************
             }
         });
@@ -74,6 +107,10 @@ public class AddActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void goBack(View view) {
+        startActivity(new Intent(AddActivity.this, MainActivity.class));
     }
 
 }
