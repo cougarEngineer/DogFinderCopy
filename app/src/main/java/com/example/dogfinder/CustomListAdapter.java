@@ -1,6 +1,5 @@
 package com.example.dogfinder;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,12 +32,15 @@ public class CustomListAdapter extends ArrayAdapter<DogProfile> {
 
         DogProfile profile = getItem(position);
         Log.d(this.toString(), "setting textView");
-        TextView textView1 = (TextView) customView.findViewById(R.id.listName);
-        TextView textView2 = (TextView) customView.findViewById(R.id.listLocation);
+        TextView textView1 = customView.findViewById(R.id.listName);
+        TextView textView2 = customView.findViewById(R.id.listLocation);
 
         Log.d(this.toString(), "getting Name and Location for textView");
         textView1.setText(String.valueOf(profile.getName()));
-        textView2.setText(String.valueOf(profile.getLocation().getLocal()));
+
+        if (profile.getLocation() != null && profile.getLocation().getLocal() != null) {
+            textView2.setText(String.valueOf(profile.getLocation().getLocal()));
+        }
         return customView;
 
 
