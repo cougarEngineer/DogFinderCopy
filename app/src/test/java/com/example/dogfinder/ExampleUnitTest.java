@@ -15,14 +15,6 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
-    /* This no longer works as it has
-    @Test
-    public void gettingListTest() {
-        DogProfileDatabaseInteractor dog = new DogProfileDatabaseInteractor();
-        List<DogProfile> list = dog.get();
-        assertNotNull(list);
-    }
-*/
     @Test
     public void dogProfileColorTest() {
         DogProfile profile = new DogProfile();
