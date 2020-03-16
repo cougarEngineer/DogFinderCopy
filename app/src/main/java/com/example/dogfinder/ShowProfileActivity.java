@@ -13,12 +13,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import java.io.InputStream;
 import java.net.URL;
 
 public class ShowProfileActivity extends AppCompatActivity {
+    String URL = "https://i.imgur.com/sdEz1o7.jpg";
     ImageView image;
     TextView name, breed, color, height, weight, otherInfo, city, state, address, contact;
 
@@ -47,7 +49,6 @@ public class ShowProfileActivity extends AppCompatActivity {
         city = findViewById(R.id.getCity);
         state = findViewById(R.id.getState);
         address = findViewById(R.id.getAddress);
-        image = findViewById(R.id.getPic);
 
         // TextView displayJsonObject
         name.setText(String.valueOf(profile.getName()));
@@ -58,6 +59,10 @@ public class ShowProfileActivity extends AppCompatActivity {
         otherInfo.setText(String.valueOf(profile.getOther()));
         contact.setText(String.valueOf(profile.getContact()));
 
+
+        image = findViewById(R.id.getPic);
+
+        Glide.with(this).load(URL).into(image);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
