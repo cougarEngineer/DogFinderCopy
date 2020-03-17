@@ -14,11 +14,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.net.MalformedURLException;
+
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class AddActivity extends AppCompatActivity {
 
-    EditText name, picture, height, weight, info, city, state, address, contact;
+    EditText name, url, height, weight, info, city, state, address, contact;
     Spinner breed, color;
     Button create, cancel;
     static final String USERNAME = "username";
@@ -30,7 +32,7 @@ public class AddActivity extends AppCompatActivity {
 
         //Hooks
         name = findViewById(R.id.nameET);
-        picture = findViewById(R.id.urlET);
+        url = findViewById(R.id.urlET);
         breed = findViewById(R.id.breedSpinner);
         color = findViewById(R.id.colorSpinner);
         height = findViewById(R.id.heightET);
@@ -50,6 +52,7 @@ public class AddActivity extends AppCompatActivity {
 
                 //****************Get User Input**********
                 String nameS = name.getText().toString();
+                String urlS = url.getText().toString();
                 String heightS = height.getText().toString();
                 String weightS = weight.getText().toString();
                 String infoS = info.getText().toString();
@@ -78,6 +81,13 @@ public class AddActivity extends AppCompatActivity {
                 User user = new User();
                 user.setToken(curUser);
                 profile.setUser(user);
+                Picture picture = new Picture();
+                try {
+                    picture.setUrl(urlS);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                profile.setPicture(picture);
                 profile.setName(nameS);
                 profile.setHeight(Integer.parseInt(heightS));
                 profile.setWeight(Integer.parseInt(weightS));

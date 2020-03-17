@@ -2,6 +2,7 @@ package com.example.dogfinder;
 
 import android.graphics.Bitmap;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 
@@ -24,7 +25,7 @@ public class Picture {
         return url;
     }
 
-    public void setUrl(URL url) {
-        this.url = url;
+    public void setUrl(String urlS) throws MalformedURLException {
+        url = new URL(urlS);
     }
 }
