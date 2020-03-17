@@ -1,5 +1,8 @@
 package com.example.dogfinder;
 
+/**
+ * Enum containing all valid breeds of dog
+ */
 public enum Breed {
     Unknown,
     LabradorRetriever, GermanShepherd, GoldenRetriever, FrenchBulldog, Bulldog, Beagle,

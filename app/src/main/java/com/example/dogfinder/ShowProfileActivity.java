@@ -19,11 +19,54 @@ import com.google.gson.Gson;
 import java.io.InputStream;
 import java.net.URL;
 
+/**
+ * The type Show profile activity.
+ */
 public class ShowProfileActivity extends AppCompatActivity {
+    /**
+     * The image from Url.
+     */
     String URL = "https://i.imgur.com/sdEz1o7.jpg";
+    /**
+     * The Image.
+     */
     ImageView image;
-    TextView name, breed, color, height, weight, otherInfo, city, state, address, contact;
+    /**
+     * The Name.
+     */
+    TextView name, /**
+     * The Breed of dog.
+     */
+    breed, /**
+     * The Color of the dog.
+     */
+    color, /**
+     * The Height of the dog.
+     */
+    height, /**
+     * The Weight of the dog.
+     */
+    weight, /**
+     * The Other info.
+     */
+    otherInfo, /**
+     * The City.
+     */
+    city, /**
+     * The State.
+     */
+    state, /**
+     * The Address.
+     */
+    address, /**
+     * The Contact information.
+     */
+    contact;
 
+    /**
+     * onCreate gets json object and deserialize the object.
+     * It then displays contents info into Textview.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +102,8 @@ public class ShowProfileActivity extends AppCompatActivity {
         otherInfo.setText(String.valueOf(profile.getOther()));
         contact.setText(String.valueOf(profile.getContact()));
 
-
+        //Load image from URL
         image = findViewById(R.id.getPic);
-
         Glide.with(this).load(URL).into(image);
 
         Toolbar toolbar = findViewById(R.id.toolbar);

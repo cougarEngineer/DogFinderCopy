@@ -25,6 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * ListActivity holds code to implement the behavior of a screen with a list of profiles,
+ * and filtering options for that
+ */
 public class ListActivity extends AppCompatActivity {
 
     private List<DogProfile> dogProfiles = new ArrayList<>();
@@ -39,6 +43,11 @@ public class ListActivity extends AppCompatActivity {
     private Spinner citySpinner;
 
 
+    /**
+     * Runs on creation of the activity
+     *
+     * @param savedInstanceState contains info from previous instances of this activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +117,10 @@ public class ListActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Determines what code is executed when the Filter button is pressed
+     * @param view Required for onClick methods
+     */
     //will change filteredDogProfiles to exclude those filtered out
     public void onClickFilterButton(View view) {
         filteredDogProfiles.clear();
