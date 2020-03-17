@@ -4,6 +4,10 @@ import android.graphics.Bitmap;
 
 import java.net.URL;
 
+
+/**
+ * Data-holding class representing a dog's picture
+ */
 public class Picture {
     private Bitmap bitmap;
     private URL url;

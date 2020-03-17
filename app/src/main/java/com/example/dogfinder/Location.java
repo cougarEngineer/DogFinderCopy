@@ -1,5 +1,8 @@
 package com.example.dogfinder;
 
+/**
+ * Data-holding class representing aspects of a dog's location
+ */
 public class Location {
     private String state = "";
     private String city = "";

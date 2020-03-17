@@ -9,11 +9,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+ * For right now, only contains code to add a DogProfile to the app's database
+ */
 public class DogProfileDatabaseInteractor {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Gson gson = new Gson();
 
+    /**
+     * Adds a DogProfile to the database
+     *
+     * @param dp The DogProfile to be added to the database
+     */
     public void add(DogProfile dp) {
         Map<String, String> data = new HashMap<>();
         data.put("profile", gson.toJson(dp));
