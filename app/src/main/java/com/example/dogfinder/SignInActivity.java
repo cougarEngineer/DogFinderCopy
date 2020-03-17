@@ -11,8 +11,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
+/**
+ * The type Sign in activity.
+ */
 public class SignInActivity extends AppCompatActivity {
 
+    /**
+     * The Username.
+     */
     static final String USERNAME = "username";
 
     @Override
@@ -33,6 +39,11 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * On click sign in button.
+     *
+     * @param view the view
+     */
     public void onClickSignInButton(View view) {
         EditText editText = findViewById(R.id.usernameField);
         String username = editText.getText().toString();
