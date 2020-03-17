@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view Required for onClick event
      */
     public void showSignIn(View view) {
-        Intent i = new Intent(this, FirebaseUIActivity.class);
+        Intent i = new Intent(this, SignInActivity.class);
         startActivity(i);
     }
 }
