@@ -24,7 +24,7 @@ import java.net.URL;
  */
 public class ShowProfileActivity extends AppCompatActivity {
     /**
-     * The image Url.
+     * The image from Url.
      */
     String URL = "https://i.imgur.com/sdEz1o7.jpg";
     /**
