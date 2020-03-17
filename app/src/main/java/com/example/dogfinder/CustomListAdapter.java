@@ -16,8 +16,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
+import com.bumptech.glide.Glide;
 
+/**
+ * CustomListAdapter houses the custom adapter that allows the listView to display images
+ * and text on the Dog Profiles List screen.
+ */
 public class CustomListAdapter extends ArrayAdapter<DogProfile> {
 
     private int resourceLayout;
@@ -25,6 +31,12 @@ public class CustomListAdapter extends ArrayAdapter<DogProfile> {
     List<DogProfile> dogP;
     private String url = "https://i.imgur.com/MU2dD8E.jpg";
 
+    /**
+     * CustomListAdapter constructor takes a context, resource, and a DogProfile list.
+     * @param context The current context.
+     * @param resource The resource file that houses the template for the listView items.
+     * @param profile The DogProfile list that contains the profile values from the database.
+     */
     public CustomListAdapter(Context context, int resource, List<DogProfile> profile) {
         super(context, resource, profile);
         this.resourceLayout = resource;
@@ -32,6 +44,12 @@ public class CustomListAdapter extends ArrayAdapter<DogProfile> {
         Log.d(this.toString(), "starting custom adapter");
     }
 
+    /**
+     * @param position The current position of the list item.
+     * @param convertView The view that is adjusted.
+     * @param parent The parent View.
+     * @return The adjusted View is returned.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Log.d(this.toString(), "starting getView");
@@ -60,18 +78,12 @@ public class CustomListAdapter extends ArrayAdapter<DogProfile> {
             textView4.setText(String.valueOf(profile.getLocation().getState()));
         }
 
-        /*
-        // Image on List
-        InputStream is = null;
-        try {
-            is = (InputStream) new URL(url).getContent();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Log.d(this.toString(), "Setting the picture for the imageView");
+        if (profile.getPicture() == null) {
+            Glide.with(mContext).load(url).into(imageView);
+        } else {
+            Glide.with(mContext).load(profile.getPicture().getUrl()).into(imageView);
         }
-        Drawable d = Drawable.createFromStream(is, "url");
-        imageView.setImageDrawable(d);
-         */
-
 
         return customView;
     }
