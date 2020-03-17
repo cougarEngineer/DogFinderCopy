@@ -1,5 +1,8 @@
 package com.example.dogfinder;
 
+/**
+ * A data-holding class representing a dog
+ */
 public class DogProfile {
     private User user;
     private ContactInfo contact;

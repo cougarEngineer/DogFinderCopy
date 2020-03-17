@@ -1,5 +1,8 @@
 package com.example.dogfinder;
 
+/**
+ * Data-holding class representing a user and its identification
+ */
 public class User {
     private String token;
 
