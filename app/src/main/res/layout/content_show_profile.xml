@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/getPic"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -22,34 +22,28 @@
 
     <TextView
         android:id="@+id/getName"
-        android:layout_width="0dp"
-        android:layout_height="22dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/getPic"
         tools:text="Name" />
 
     <TextView
         android:id="@+id/getBreed"
-        android:layout_width="166dp"
-        android:layout_height="27dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
-        app:layout_constraintStart_toEndOf="@+id/getColor"
         app:layout_constraintTop_toBottomOf="@+id/getName"
         tools:text="Breed" />
 
     <TextView
         android:id="@+id/getHeight"
-        android:layout_width="59dp"
-        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,20 +52,18 @@
 
     <TextView
         android:id="@+id/getWeight"
-        android:layout_width="66dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.433"
-        app:layout_constraintStart_toEndOf="@+id/getHeight"
         app:layout_constraintTop_toBottomOf="@+id/getColor"
         tools:text="Weight" />
 
     <TextView
         android:id="@+id/getColor"
-        android:layout_width="116dp"
-        android:layout_height="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,13 +72,11 @@
 
     <TextView
         android:id="@+id/getInfo"
-        android:layout_width="390dp"
-        android:layout_height="48dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/getHeight"
@@ -94,13 +84,11 @@
 
     <TextView
         android:id="@+id/getAddress"
-        android:layout_width="379dp"
-        android:layout_height="32dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/getInfo"
@@ -108,8 +96,8 @@
 
     <TextView
         android:id="@+id/getCity"
-        android:layout_width="170dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,26 +106,21 @@
 
     <TextView
         android:id="@+id/getState"
-        android:layout_width="91dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/getCity"
         app:layout_constraintTop_toBottomOf="@+id/getAddress"
         tools:text="State" />
 
     <TextView
         android:id="@+id/getContact"
-        android:layout_width="381dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/getCity"
         tools:text="Contact" />
 
@@ -163,5 +146,27 @@
         android:text="@string/deleteButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/getSex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Sex"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getPic" />
+
+    <TextView
+        android:id="@+id/getUser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Username"
+        app:layout_constraintEnd_toStartOf="@+id/getContact"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getCity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

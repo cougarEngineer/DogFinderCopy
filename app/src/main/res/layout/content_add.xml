@@ -36,10 +36,9 @@
 
     <TextView
         android:id="@+id/breedTV"
-        android:layout_width="152dp"
-        android:layout_height="23dp"
+        android:layout_width="136dp"
+        android:layout_height="24dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="Breed"
         android:textSize="16dp"
@@ -49,37 +48,33 @@
 
     <Spinner
         android:id="@+id/breedSpinner"
-        android:layout_width="154dp"
+        android:layout_width="0dp"
         android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/breedTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/breedTV" />
 
     <TextView
         android:id="@+id/colorTV"
-        android:layout_width="144dp"
+        android:layout_width="0dp"
         android:layout_height="24dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:text="Color"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/sexTV"
         app:layout_constraintStart_toEndOf="@+id/breedTV"
         app:layout_constraintTop_toBottomOf="@+id/urlET" />
 
     <Spinner
         android:id="@+id/colorSpinner"
-        android:layout_width="157dp"
+        android:layout_width="0dp"
         android:layout_height="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/colorTV"
         app:layout_constraintStart_toEndOf="@+id/breedSpinner"
         app:layout_constraintTop_toBottomOf="@+id/colorTV" />
 
@@ -202,6 +197,27 @@
         app:layout_constraintHorizontal_bias="0.69"
         app:layout_constraintStart_toEndOf="@+id/createBtn"
         app:layout_constraintTop_toBottomOf="@+id/contactET" />
+
+    <TextView
+        android:id="@+id/sexTV"
+        android:layout_width="80dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Sex"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/urlET" />
+
+    <Spinner
+        android:id="@+id/sexSpinner"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/sexTV"
+        app:layout_constraintStart_toEndOf="@+id/colorSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/sexTV" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

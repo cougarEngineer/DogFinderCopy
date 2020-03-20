@@ -3,7 +3,7 @@ package com.example.dogfinder;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,7 +21,7 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 public class AddActivity extends AppCompatActivity {
 
     EditText name, url, height, weight, info, city, state, address, contact;
-    Spinner breed, color;
+    Spinner breed, color, sex;
     Button create, cancel;
     static final String USERNAME = "username";
 
@@ -35,6 +35,7 @@ public class AddActivity extends AppCompatActivity {
         url = findViewById(R.id.urlET);
         breed = findViewById(R.id.breedSpinner);
         color = findViewById(R.id.colorSpinner);
+        sex = findViewById(R.id.sexSpinner);
         height = findViewById(R.id.heightET);
         weight = findViewById(R.id.weightET);
         info = findViewById(R.id.infoET);
@@ -43,8 +44,10 @@ public class AddActivity extends AppCompatActivity {
         address = findViewById(R.id.addressET);
         contact = findViewById(R.id.contactET);
         create = findViewById(R.id.createBtn);
+
         breed.setAdapter(new ArrayAdapter<Breed>(this, android.R.layout.simple_spinner_item, Breed.values()));
         color.setAdapter(new ArrayAdapter<Color>(this, android.R.layout.simple_spinner_item, Color.values()));
+        sex.setAdapter(new ArrayAdapter<Sex>(this, android.R.layout.simple_spinner_item, Sex.values()));
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +63,6 @@ public class AddActivity extends AppCompatActivity {
                 String stateS = state.getText().toString();
                 String addressS = address.getText().toString();
                 String contactS = contact.getText().toString();
-                String breedS = breed.getSelectedItem().toString();
-                String colorS = color.getSelectedItem().toString();
 
 //                Intent intent = new Intent(AddActivity.this, ShowProfileActivity.class);
 //                intent.putExtra("name", nameS);
@@ -85,12 +86,14 @@ public class AddActivity extends AppCompatActivity {
                 try {
                     picture.setUrl(urlS);
                 } catch (MalformedURLException e) {
+                    Toast.makeText(getApplicationContext(), "Error with image", Toast.LENGTH_SHORT).show();
+                    Log.e("AddActivity", "MalformedURLException");
                     e.printStackTrace();
                 }
                 profile.setPicture(picture);
                 profile.setName(nameS);
-                profile.setHeight(Integer.parseInt(heightS));
-                profile.setWeight(Integer.parseInt(weightS));
+                profile.setHeight(heightS);
+                profile.setWeight(weightS);
                 profile.setOther(infoS);
                 Location location = new Location();
                 location.setCity(cityS);
@@ -103,6 +106,7 @@ public class AddActivity extends AppCompatActivity {
                 profile.setContact(contactInfo);
                 profile.setBreed((Breed) breed.getSelectedItem());
                 profile.setColor((Color) color.getSelectedItem());
+                profile.setSex((Sex) sex.getSelectedItem());
                 new DogProfileDatabaseInteractor().add(profile);
 
                 Toast.makeText(getApplicationContext(), "Dog added" ,Toast.LENGTH_SHORT).show();

@@ -27,6 +27,9 @@ public class ShowProfileActivity extends AppCompatActivity {
     /**
      * The Name.
      */
+    /**
+     *
+     */
     TextView name, /**
      * The Breed of dog.
      */
@@ -54,7 +57,9 @@ public class ShowProfileActivity extends AppCompatActivity {
     address, /**
      * The Contact information.
      */
-    contact;
+    contact,
+            sex,
+            user;
 
     /**
      * onCreate gets json object and deserialize the object.
@@ -86,21 +91,30 @@ public class ShowProfileActivity extends AppCompatActivity {
         city = findViewById(R.id.getCity);
         state = findViewById(R.id.getState);
         address = findViewById(R.id.getAddress);
-
+        user = findViewById(R.id.getUser);
+        sex = findViewById(R.id.getSex);
         // TextView displayJsonObject
         if (profile.getPicture() != null && profile.getPicture().getUrl() != null) {
             URL = profile.getPicture().getUrl().toString();
         } else {
             URL = "https://i.imgur.com/SdumAU9.gif";
         }
-        name.setText(String.valueOf(profile.getName()));
-        breed.setText(String.valueOf(profile.getBreed()));
-        color.setText(String.valueOf(profile.getColor()));
-        height.setText(String.valueOf(profile.getHeight()));
-        weight.setText(String.valueOf(profile.getWeight()));
-        otherInfo.setText(String.valueOf(profile.getOther()));
-        contact.setText(String.valueOf(profile.getContact()));
-
+        name.setText("Name: " + profile.getName());
+        breed.setText("Breed: " + profile.getBreed());
+        color.setText("Color: " + profile.getColor());
+        height.setText("Height: " + profile.getHeight());
+        weight.setText("Weight: " + profile.getWeight());
+        otherInfo.setText("Other Info: " + profile.getOther());
+        contact.setText("Contact Info: " + profile.getContact().getPhone());
+        address.setText("Local: " + profile.getLocation().getLocal());
+        city.setText("City: " + profile.getLocation().getCity());
+        state.setText("State: " + profile.getLocation().getState());
+        user.setText("Username: " + profile.getUser().getToken());
+        Sex s = profile.getSex();
+        if (s == null) {
+            s = Sex.Unknown;
+        }
+        sex.setText("Sex: " + s);
         //Load image from URL
         image = findViewById(R.id.getPic);
         Glide.with(this).load(URL).into(image);

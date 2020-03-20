@@ -8,10 +8,11 @@ public class DogProfile {
     private ContactInfo contact;
     private Picture picture;
     private String name;
+    private Sex sex = Sex.Male;
     private Breed breed = Breed.Unknown;
     private Color color = Color.Unknown;
-    private int height;
-    private int weight;
+    private String height;
+    private String weight;
     private String other;
     private Location location;
 
@@ -63,19 +64,19 @@ public class DogProfile {
         this.color = color;
     }
 
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
@@ -93,5 +94,13 @@ public class DogProfile {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
 }
