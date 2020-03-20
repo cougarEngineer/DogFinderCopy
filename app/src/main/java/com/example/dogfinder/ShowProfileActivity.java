@@ -19,7 +19,7 @@ public class ShowProfileActivity extends AppCompatActivity {
     /**
      * The image from Url.
      */
-    String URL = "https://i.imgur.com/sdEz1o7.jpg";
+    String URL; // = "https://i.imgur.com/sdEz1o7.jpg";
     /**
      * The Image.
      */
@@ -88,6 +88,11 @@ public class ShowProfileActivity extends AppCompatActivity {
         address = findViewById(R.id.getAddress);
 
         // TextView displayJsonObject
+        if (profile.getPicture() != null && profile.getPicture().getUrl() != null) {
+            URL = profile.getPicture().getUrl().toString();
+        } else {
+            URL = "https://i.imgur.com/SdumAU9.gif";
+        }
         name.setText(String.valueOf(profile.getName()));
         breed.setText(String.valueOf(profile.getBreed()));
         color.setText(String.valueOf(profile.getColor()));

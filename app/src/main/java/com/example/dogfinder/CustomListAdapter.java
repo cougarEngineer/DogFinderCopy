@@ -1,9 +1,6 @@
 package com.example.dogfinder;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.List;
 import com.bumptech.glide.Glide;
+
+import java.util.List;
 
 /**
  * CustomListAdapter houses the custom adapter that allows the listView to display images
@@ -29,7 +22,7 @@ public class CustomListAdapter extends ArrayAdapter<DogProfile> {
     private int resourceLayout;
     private Context mContext;
     List<DogProfile> dogP;
-    private String url = "https://i.imgur.com/MU2dD8E.jpg";
+    private String url = "https://i.imgur.com/SdumAU9.gif";
 
     /**
      * CustomListAdapter constructor takes a context, resource, and a DogProfile list.
@@ -82,7 +75,7 @@ public class CustomListAdapter extends ArrayAdapter<DogProfile> {
         if (profile.getPicture() == null) {
             Glide.with(mContext).load(url).into(imageView);
         } else {
-            Glide.with(mContext).load(profile.getPicture().getUrl()).into(imageView);
+            Glide.with(mContext).load(profile.getPicture().getUrl().toString()).into(imageView);
         }
 
         return customView;
