@@ -1,6 +1,9 @@
 package com.example.dogfinder;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,10 +15,14 @@ import androidx.appcompat.widget.Toolbar;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
 /**
  * The type Show profile activity.
  */
 public class ShowProfileActivity extends AppCompatActivity {
+    private static final String USERNAME = "username";
+    private DogProfile profile;
     /**
      * The image from Url.
      */
@@ -78,7 +85,7 @@ public class ShowProfileActivity extends AppCompatActivity {
         String json = getIntent().getStringExtra("profile");
 
         //GSON deserialization
-        DogProfile profile = gson.fromJson(json, DogProfile.class);
+        profile = gson.fromJson(json, DogProfile.class);
 
         //xml view id's
         name = findViewById(R.id.getName);
@@ -105,11 +112,25 @@ public class ShowProfileActivity extends AppCompatActivity {
         height.setText("Height: " + profile.getHeight());
         weight.setText("Weight: " + profile.getWeight());
         otherInfo.setText("Other Info: " + profile.getOther());
-        contact.setText("Contact Info: " + profile.getContact().getPhone());
-        address.setText("Local: " + profile.getLocation().getLocal());
-        city.setText("City: " + profile.getLocation().getCity());
-        state.setText("State: " + profile.getLocation().getState());
-        user.setText("Username: " + profile.getUser().getToken());
+        if (profile.getContact() != null) {
+            contact.setText("Contact Info: " + profile.getContact().getPhone());
+        } else {
+            contact.setText("Contact Info: ");
+        }
+        if (profile.getLocation() != null) {
+            address.setText("Local: " + profile.getLocation().getLocal());
+            city.setText("City: " + profile.getLocation().getCity());
+            state.setText("State: " + profile.getLocation().getState());
+        } else {
+            address.setText("Local: ");
+            city.setText("City: ");
+            state.setText("State: ");
+        }
+        if (profile.getUser() != null) {
+            user.setText("Username: " + profile.getUser().getToken());
+        } else {
+            user.setText("Username: ");
+        }
         Sex s = profile.getSex();
         if (s == null) {
             s = Sex.Unknown;
@@ -157,7 +178,17 @@ public class ShowProfileActivity extends AppCompatActivity {
 ------------------------------------------------------*/
 
     public void onClickDelete(View view) {
-        Toast.makeText(getApplicationContext(), "You are not the owner of this dog", Toast.LENGTH_SHORT).show();
+        SharedPreferences mPrefs = getDefaultSharedPreferences(getApplicationContext());
+        String curUser = mPrefs.getString(USERNAME, "");
+        if (profile.getUser() != null && !curUser.equals(profile.getUser().getToken())) {
+            Toast.makeText(getApplicationContext(), "You are not the owner of this dog", Toast.LENGTH_SHORT).show();
+            Log.d("deleteProfile", "Deletion failed");
+        } else {
+            Toast.makeText(getApplicationContext(), "Deleting dog profile", Toast.LENGTH_SHORT).show();
+            new DogProfileDatabaseInteractor().delete(profile);
+            Log.d("deleteProfile", "Deletion success");
+            startActivity(new Intent(ShowProfileActivity.this, MainActivity.class));
+        }
     }
 
     public void onClickComments(View view) {

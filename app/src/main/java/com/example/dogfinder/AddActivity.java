@@ -52,7 +52,7 @@ public class AddActivity extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                boolean hasImage = true;
                 //****************Get User Input**********
                 String nameS = name.getText().toString();
                 String urlS = url.getText().toString();
@@ -86,7 +86,7 @@ public class AddActivity extends AppCompatActivity {
                 try {
                     picture.setUrl(urlS);
                 } catch (MalformedURLException e) {
-                    Toast.makeText(getApplicationContext(), "Error with image", Toast.LENGTH_SHORT).show();
+                    hasImage = false;
                     Log.e("AddActivity", "MalformedURLException");
                     e.printStackTrace();
                 }
@@ -108,8 +108,12 @@ public class AddActivity extends AppCompatActivity {
                 profile.setColor((Color) color.getSelectedItem());
                 profile.setSex((Sex) sex.getSelectedItem());
                 new DogProfileDatabaseInteractor().add(profile);
+                if (hasImage) {
+                    Toast.makeText(getApplicationContext(), "Dog added", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Dog added without image", Toast.LENGTH_SHORT).show();
+                }
 
-                Toast.makeText(getApplicationContext(), "Dog added" ,Toast.LENGTH_SHORT).show();
 
                 //****************************************
             }

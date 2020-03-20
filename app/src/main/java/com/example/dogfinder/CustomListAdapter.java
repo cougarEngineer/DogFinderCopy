@@ -72,7 +72,7 @@ public class CustomListAdapter extends ArrayAdapter<DogProfile> {
         }
 
         Log.d(this.toString(), "Setting the picture for the imageView");
-        if (profile.getPicture() == null) {
+        if (profile.getPicture() == null || profile.getPicture().getUrl() == null) {
             Glide.with(mContext).load(url).into(imageView);
         } else {
             Glide.with(mContext).load(profile.getPicture().getUrl().toString()).into(imageView);
