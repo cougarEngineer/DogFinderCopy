@@ -11,4 +11,6 @@
     <string name="name">Name</string>
     <string name="location">Location</string>
     <string name="filter_button_text">Filter</string>
+    <string name="deleteButton">Delete</string>
+    <string name="commentsButton">Comments</string>
 </resources>

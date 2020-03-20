@@ -1,11 +1,7 @@
 package com.example.dogfinder;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,9 +11,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-
-import java.io.InputStream;
-import java.net.URL;
 
 /**
  * The type Show profile activity.
@@ -142,4 +135,12 @@ public class ShowProfileActivity extends AppCompatActivity {
         }
     }
 ------------------------------------------------------*/
+
+    public void onClickDelete(View view) {
+        Toast.makeText(getApplicationContext(), "You are not the owner of this dog", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onClickComments(View view) {
+        Toast.makeText(getApplicationContext(), "Comments button", Toast.LENGTH_SHORT).show();
+    }
 }
