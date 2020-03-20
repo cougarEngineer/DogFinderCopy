@@ -68,8 +68,9 @@ public class ShowProfileActivity extends AppCompatActivity {
         Gson gson = new Gson();
 
         //dogProfile object in JSON form
-        DogProfile dogProfile = new DogProfile();
-        String json = gson.toJson(dogProfile);
+
+
+        String json = getIntent().getStringExtra("profile");
 
         //GSON deserialization
         DogProfile profile = gson.fromJson(json, DogProfile.class);

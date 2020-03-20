@@ -2,6 +2,7 @@ package com.example.dogfinder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -41,6 +43,8 @@ public class ListActivity extends AppCompatActivity {
     private ListView listView;
     private Spinner stateSpinner;
     private Spinner citySpinner;
+
+    public static final String EXTRA_MESSAGE = "com.example.dogfinder.MESSAGE";
 
 
     /**
@@ -110,8 +114,14 @@ public class ListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent iP = new Intent(new Intent(ListActivity.this, ShowProfileActivity.class));
-                startActivity(iP);
+
+                //DogProfile d = filteredDogProfiles.get(position);
+                Intent intent = new Intent(ListActivity.this, ShowProfileActivity.class);
+                intent.putExtra("profile", gson.toJson(filteredDogProfiles.get(position)));
+                startActivity(intent);
+
+                //Gson gson = new Gson();
+                //intent.putExtra(EXTRA_MESSAGE, gson.toJson(filteredDogProfiles));
             }
         });
     }
