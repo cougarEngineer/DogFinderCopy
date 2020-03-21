@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +69,11 @@ public class ShowProfileActivity extends AppCompatActivity {
             sex,
             user;
 
+    //Share Button
+    Button shareBtn;
+    Intent shareIntent;
+    String shareText;
+
     /**
      * onCreate gets json object and deserialize the object.
      * It then displays contents info into Textview.
@@ -80,8 +86,6 @@ public class ShowProfileActivity extends AppCompatActivity {
         Gson gson = new Gson();
 
         //dogProfile object in JSON form
-
-
         String json = getIntent().getStringExtra("profile");
 
         //GSON deserialization
@@ -145,6 +149,31 @@ public class ShowProfileActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Share Button
+        shareText = "Check out this dog!";
+        if (profile.getName() != null){
+            shareText += " Their name is " + profile.getName() + ".";
+        }
+        shareText += " For additional details, please visit the Dog Finder application.";
+
+        shareBtn = findViewById(R.id.shareButton);
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This function changes the view when the share button is selected.
+             * @param v The View
+             */
+            @Override
+            public void onClick(View v) {
+                shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Dog Profile");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+            }
+        });
+
+
     }
 
 /*-------------------------Get image---------------------
