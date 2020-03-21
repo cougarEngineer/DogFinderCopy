@@ -1,5 +1,8 @@
 package com.example.dogfinder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A data-holding class representing a dog
  */
@@ -15,6 +18,7 @@ public class DogProfile {
     private String weight;
     private String other;
     private Location location;
+    private List<String> comments = new ArrayList<>();
 
     public User getUser() {
         return user;
@@ -102,5 +106,13 @@ public class DogProfile {
 
     public void setSex(Sex sex) {
         this.sex = sex;
+    }
+
+    public List<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
     }
 }

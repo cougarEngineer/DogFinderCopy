@@ -14,7 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
+
+import java.util.List;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
@@ -24,6 +29,8 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 public class ShowProfileActivity extends AppCompatActivity {
     private static final String USERNAME = "username";
     private DogProfile profile;
+    private Gson gson = new Gson();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     /**
      * The image from Url.
      */
@@ -221,6 +228,24 @@ public class ShowProfileActivity extends AppCompatActivity {
     }
 
     public void onClickComments(View view) {
-        Toast.makeText(getApplicationContext(), "Comments button", Toast.LENGTH_SHORT).show();
+        String json = gson.toJson(profile);
+        db.collection("profiles").whereEqualTo("profile", json).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot result = task.getResult();
+                        if(result.isEmpty()) {
+                            Log.d("commentsDogProfile", "Error finding dogProfile ", task.getException());
+                        } else {
+                            List<DocumentSnapshot> documents = result.getDocuments();
+                            DocumentSnapshot documentSnapshot = documents.get(0);
+                            String id = documentSnapshot.getId();
+                            Intent comments = new Intent(ShowProfileActivity.this, CommentsActivity.class);
+                            comments.putExtra("id", id);
+                            startActivity(comments);
+                        }
+                    } else {
+                        Log.d("commentsDogProfile", "Error finding dogProfile ", task.getException());
+                    }
+                });
     }
 }
