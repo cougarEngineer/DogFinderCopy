@@ -115,13 +115,10 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //DogProfile d = filteredDogProfiles.get(position);
                 Intent intent = new Intent(ListActivity.this, ShowProfileActivity.class);
                 intent.putExtra("profile", gson.toJson(filteredDogProfiles.get(position)));
                 startActivity(intent);
 
-                //Gson gson = new Gson();
-                //intent.putExtra(EXTRA_MESSAGE, gson.toJson(filteredDogProfiles));
             }
         });
     }

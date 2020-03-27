@@ -13,4 +13,9 @@
     <string name="filter_button_text">Filter</string>
     <string name="deleteButton">Delete</string>
     <string name="commentsButton">Comments</string>
+    <string name="add_profile">Add Dog Profile</string>
+    <string name="profile_list">Profile List</string>
+    <string name="add_profile_btn">Add Profile</string>
+    <string name="sign_in_btn">Sign In</string>
+    <string name="logo">Dog Finder Logo</string>
 </resources>
