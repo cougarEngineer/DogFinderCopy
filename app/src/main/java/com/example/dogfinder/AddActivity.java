@@ -20,11 +20,11 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class AddActivity extends AppCompatActivity {
 
-    EditText name, url, height, weight, info, city, state, address, contact;
-    Spinner breed, color, sex;
+    EditText name, url, height, weight, info, city, address, contact;
+    Spinner breed, color, sex, state;
     Button create, cancel;
     static final String USERNAME = "username";
-
+    static final String[] STATELIST = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +40,7 @@ public class AddActivity extends AppCompatActivity {
         weight = findViewById(R.id.weightET);
         info = findViewById(R.id.infoET);
         city = findViewById(R.id.cityET);
-        state = findViewById(R.id.stateET);
+        state = findViewById(R.id.stateSpinner);
         address = findViewById(R.id.addressET);
         contact = findViewById(R.id.contactET);
         create = findViewById(R.id.createBtn);
@@ -48,7 +48,7 @@ public class AddActivity extends AppCompatActivity {
         breed.setAdapter(new ArrayAdapter<Breed>(this, android.R.layout.simple_spinner_item, Breed.values()));
         color.setAdapter(new ArrayAdapter<Color>(this, android.R.layout.simple_spinner_item, Color.values()));
         sex.setAdapter(new ArrayAdapter<Sex>(this, android.R.layout.simple_spinner_item, Sex.values()));
-
+        state.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, STATELIST));
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +60,7 @@ public class AddActivity extends AppCompatActivity {
                 String weightS = weight.getText().toString();
                 String infoS = info.getText().toString();
                 String cityS = city.getText().toString();
-                String stateS = state.getText().toString();
+                String stateS = state.getSelectedItem().toString();
                 String addressS = address.getText().toString();
                 String contactS = contact.getText().toString();
 

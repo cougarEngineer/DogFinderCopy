@@ -142,19 +142,6 @@
         app:layout_constraintTop_toBottomOf="@+id/addressET" />
 
     <EditText
-        android:id="@+id/stateET"
-        android:layout_width="144dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="State"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cityET"
-        app:layout_constraintTop_toBottomOf="@+id/addressET" />
-
-    <EditText
         android:id="@+id/contactET"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -218,6 +205,15 @@
         app:layout_constraintEnd_toEndOf="@+id/sexTV"
         app:layout_constraintStart_toEndOf="@+id/colorSpinner"
         app:layout_constraintTop_toBottomOf="@+id/sexTV" />
+
+    <Spinner
+        android:id="@+id/stateSpinner"
+        android:layout_width="167dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressET" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

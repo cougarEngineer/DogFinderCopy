@@ -72,6 +72,7 @@ public class CommentsActivity extends AppCompatActivity {
     }
 
     public void onClickPost(View view) {
+        Log.d("commentAdd", "Post button pressed");
         String comment = editComments.getText().toString();
         SharedPreferences mPrefs = getDefaultSharedPreferences(getApplicationContext());
         String curUser = mPrefs.getString(USERNAME, "");
@@ -79,7 +80,7 @@ public class CommentsActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Comment is empty!", Toast.LENGTH_SHORT).show();
         } else if (curUser == null || curUser == "") {
             Toast.makeText(getApplicationContext(), "You aren't signed in!", Toast.LENGTH_SHORT).show();
-            finish();
+            startActivity(new Intent(CommentsActivity.this, MainActivity.class));
         } else {
             List<String> comments = profile.getComments();
             comments.add(curUser + ": " + comment);
@@ -92,7 +93,8 @@ public class CommentsActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Log.d("commentAdd", "DocumentSnapshot successfully written!");
-                            startActivity(new Intent(CommentsActivity.this, MainActivity.class));
+                            Toast.makeText(getApplicationContext(), "Comment posted!", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(CommentsActivity.this, MainActivity.class));
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -100,9 +102,10 @@ public class CommentsActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             Log.w("commentAdd", "Error writing document", e);
                             Toast.makeText(getApplicationContext(), "Error adding comment", Toast.LENGTH_SHORT).show();
-                            finish();
+                            //startActivity(new Intent(CommentsActivity.this, MainActivity.class));
                         }
                     });
+            startActivity(new Intent(CommentsActivity.this, MainActivity.class));
         }
     }
 }
