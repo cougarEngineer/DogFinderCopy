@@ -112,7 +112,7 @@ public class CommentsActivity extends AppCompatActivity {
                         public void onSuccess(Void aVoid) {
                             Log.d("commentAdd", "DocumentSnapshot successfully written!");
                             Toast.makeText(getApplicationContext(), "Comment posted!", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(CommentsActivity.this, MainActivity.class));
+                            startActivity(new Intent(CommentsActivity.this, MainActivity.class));
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -120,10 +120,9 @@ public class CommentsActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             Log.w("commentAdd", "Error writing document", e);
                             Toast.makeText(getApplicationContext(), "Error adding comment", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(CommentsActivity.this, MainActivity.class));
+                            startActivity(new Intent(CommentsActivity.this, MainActivity.class));
                         }
                     });
-            startActivity(new Intent(CommentsActivity.this, MainActivity.class));
         }
     }
 }
