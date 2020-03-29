@@ -10,12 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
@@ -27,9 +32,10 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
  * The type Show profile activity.
  */
 public class ShowProfileActivity extends AppCompatActivity {
-    private static final String USERNAME = "username";
     private DogProfile profile;
     private Gson gson = new Gson();
+    private String curUser;
+    private FirebaseAuth fAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     /**
      * The image from Url.
@@ -157,6 +163,21 @@ public class ShowProfileActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Get User
+        if(fAuth.getCurrentUser() != null) {
+            String userID;
+            userID = fAuth.getCurrentUser().getUid();
+            DocumentReference dRef = db.collection("users").document(userID);
+            dRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    curUser = documentSnapshot.getString("username");
+                }
+            });
+        } else {
+            curUser = "";
+        }
+
         //Share Button
         shareText = "Check out this dog!";
         if (profile.getName() != null){
@@ -214,8 +235,6 @@ public class ShowProfileActivity extends AppCompatActivity {
 ------------------------------------------------------*/
 
     public void onClickDelete(View view) {
-        SharedPreferences mPrefs = getDefaultSharedPreferences(getApplicationContext());
-        String curUser = mPrefs.getString(USERNAME, "");
         if (profile.getUser() != null && !curUser.equals(profile.getUser().getToken())) {
             Toast.makeText(getApplicationContext(), "You are not the owner of this dog", Toast.LENGTH_SHORT).show();
             Log.d("deleteProfile", "Deletion failed");

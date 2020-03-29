@@ -4,8 +4,10 @@
     <string name="title_activity_add">AddActivity</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_show_profile">ShowProfileActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
     <string name="username">Username</string>
     <string name="sign_in">Sign In</string>
+    <string name="log_out">Log Out</string>
     <string name="dog_profile_list">Dog Profile List</string>
     <string name="dog_picture">Dog Picture</string>
     <string name="name">Name</string>
@@ -13,6 +15,16 @@
     <string name="filter_button_text">Filter</string>
     <string name="deleteButton">Delete</string>
     <string name="commentsButton">Comments</string>
+    <string name="sign_in_email">Email</string>
+    <string name="sign_in_password">Password</string>
+    <string name="sign_in_register_text">Don\'t have an account? <u>Create one now</u></string>
+    <string name="register">Register</string>
+    <string name="register_username">Username</string>
+    <string name="register_email">Email</string>
+    <string name="register_password">Password</string>
+    <string name="register_password_confirm">Confirm Password</string>
+    <string name="register_phone">Phone (optional)</string>
+    <string name="register_button">Create Account</string>
     <string name="add_profile">Add Dog Profile</string>
     <string name="profile_list">Profile List</string>
     <string name="add_profile_btn">Add Profile</string>

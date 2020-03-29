@@ -1,6 +1,7 @@
 package com.example.dogfinder;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,8 +18,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
 
@@ -30,11 +35,11 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class CommentsActivity extends AppCompatActivity {
 
-    private static final String USERNAME = "username";
     private DogProfile profile;
+    private FirebaseAuth fAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Gson gson = new Gson();
-    private String dpid;
+    private String dpid, curUser;
     private ListView commentsList;
     private EditText editComments;
     private Button post;
@@ -63,6 +68,19 @@ public class CommentsActivity extends AppCompatActivity {
                         Log.d("get comments profile", "Error getting document", task.getException());
                     }
                 });
+        if(fAuth.getCurrentUser() != null) {
+            String userID = fAuth.getCurrentUser().getUid();
+            DocumentReference dRef = db.collection("users").document(userID);
+            dRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    curUser = documentSnapshot.getString("username");
+                }
+            });
+        } else {
+            curUser = "";
+        }
+
     }
 
     private void doWhenDataGot() {
@@ -74,8 +92,8 @@ public class CommentsActivity extends AppCompatActivity {
     public void onClickPost(View view) {
         Log.d("commentAdd", "Post button pressed");
         String comment = editComments.getText().toString();
-        SharedPreferences mPrefs = getDefaultSharedPreferences(getApplicationContext());
-        String curUser = mPrefs.getString(USERNAME, "");
+        Log.d("commentAdd", "Getting username");
+
         if (comment.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Comment is empty!", Toast.LENGTH_SHORT).show();
         } else if (curUser == null || curUser == "") {

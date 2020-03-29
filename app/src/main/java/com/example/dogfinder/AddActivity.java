@@ -11,8 +11,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.net.MalformedURLException;
 
@@ -23,12 +31,19 @@ public class AddActivity extends AppCompatActivity {
     EditText name, url, height, weight, info, city, address, contact;
     Spinner breed, color, sex, state;
     Button create, cancel;
-    static final String USERNAME = "username";
+    String curUser;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     static final String[] STATELIST = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Hooks
         name = findViewById(R.id.nameET);
@@ -49,6 +64,23 @@ public class AddActivity extends AppCompatActivity {
         color.setAdapter(new ArrayAdapter<Color>(this, android.R.layout.simple_spinner_item, Color.values()));
         sex.setAdapter(new ArrayAdapter<Sex>(this, android.R.layout.simple_spinner_item, Sex.values()));
         state.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, STATELIST));
+
+        //Pull Contact Info
+        if(fAuth.getCurrentUser() != null) {
+            String userID;
+            userID = fAuth.getCurrentUser().getUid();
+            DocumentReference dRef = fStore.collection("users").document(userID);
+            dRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    curUser = documentSnapshot.getString("username");
+                    contact.setText(documentSnapshot.getString("phone"));
+                }
+            });
+        } else {
+            curUser = "NULL";
+        }
+
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,8 +109,6 @@ public class AddActivity extends AppCompatActivity {
 //                startActivity(intent);
 
                 DogProfile profile = new DogProfile();
-                SharedPreferences mPrefs = getDefaultSharedPreferences(getApplicationContext());
-                String curUser = mPrefs.getString(USERNAME, "");
                 User user = new User();
                 user.setToken(curUser);
                 profile.setUser(user);
@@ -120,11 +150,6 @@ public class AddActivity extends AppCompatActivity {
         });
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void goBack(View view) {

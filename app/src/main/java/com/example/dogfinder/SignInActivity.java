@@ -1,13 +1,26 @@
 package com.example.dogfinder;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
@@ -15,6 +28,11 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
  * The type Sign in activity.
  */
 public class SignInActivity extends AppCompatActivity {
+
+    EditText mEmail, mPassword;
+    Button mLoginBtn;
+    ProgressBar progressBar;
+    FirebaseAuth fAuth;
 
     /**
      * The Username.
@@ -27,16 +45,14 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        TextView tv = findViewById(R.id.currentUserTextView);
-        SharedPreferences mPrefs = getDefaultSharedPreferences(getApplicationContext());
-        String curUser = mPrefs.getString(USERNAME, "");
-        if (curUser.equals("")) {
-            tv.setText("Not signed in");
-        } else {
-            tv.setText("Signed in as " + curUser);
-        }
+
+        mEmail = findViewById(R.id.emailField);
+        mPassword = findViewById(R.id.passwordField);
+        mLoginBtn = findViewById(R.id.signInButton);
+
+        fAuth = FirebaseAuth.getInstance();
+        progressBar = findViewById(R.id.progressBar);
     }
 
     /**
@@ -45,13 +61,39 @@ public class SignInActivity extends AppCompatActivity {
      * @param view the view
      */
     public void onClickSignInButton(View view) {
-        EditText editText = findViewById(R.id.usernameField);
-        String username = editText.getText().toString();
-        TextView tv = findViewById(R.id.currentUserTextView);
-        tv.setText("Signed in as " + username);
-        SharedPreferences mPrefs = getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        prefsEditor.putString(USERNAME, username);
-        prefsEditor.apply();
+        String email = mEmail.getText().toString().trim();
+        String password = mPassword.getText().toString().trim();
+
+        if(TextUtils.isEmpty(email)) {
+            mEmail.setError("Please Enter Email");
+            return;
+        }
+
+        if(TextUtils.isEmpty(password)) {
+            mPassword.setError("Please Enter Password");
+            return;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        // User Authentication
+
+        fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()) {
+                    Toast.makeText(SignInActivity.this,"Sign in Successful", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                } else {
+                    Toast.makeText(SignInActivity.this, "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+    }
+
+    public void onClickRegisterTextView(View view) {
+        Intent i = new Intent(this, RegisterActivity.class);
+        startActivity(i);
     }
 }

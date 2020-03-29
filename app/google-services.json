@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1070682264057-mnbrsh857o5aarn7qgcufln5dgdp4qij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dogfinder",
+            "certificate_hash": "e14a91b5567d537ac8b80db95154ceb17d000297"
+          }
+        },
+        {
           "client_id": "1070682264057-g5hfbbo1ee7f2uu0lj9lsf367pl7hp9k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

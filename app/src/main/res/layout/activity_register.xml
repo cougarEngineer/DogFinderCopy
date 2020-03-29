@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInActivity">
+    tools:context=".RegisterActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -17,10 +17,10 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/sign_in" />
+            app:title="@string/register" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_sign_in" />
+    <include layout="@layout/content_register" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
