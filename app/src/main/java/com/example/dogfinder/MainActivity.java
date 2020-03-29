@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void showAdd(View view) {
         if(fAuth.getCurrentUser() == null) {
-            Toast.makeText(this, "Please Log in to Add Profiles", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please sign in to add dogs", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void logOut(View view) {
         if(fAuth.getCurrentUser() == null) {
-            Toast.makeText(this, "You are not logged in", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You are not signed in", Toast.LENGTH_SHORT).show();
             return;
         }
 
