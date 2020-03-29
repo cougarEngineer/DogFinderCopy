@@ -91,7 +91,7 @@ public class AddActivity extends AppCompatActivity {
                 String heightS = height.getText().toString();
                 String weightS = weight.getText().toString();
                 String infoS = info.getText().toString();
-                String cityS = city.getText().toString();
+                String cityS = city.getText().toString().trim();
                 String stateS = state.getSelectedItem().toString();
                 String addressS = address.getText().toString();
                 String contactS = contact.getText().toString();
