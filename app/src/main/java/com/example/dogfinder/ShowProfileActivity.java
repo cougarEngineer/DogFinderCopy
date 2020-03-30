@@ -185,6 +185,10 @@ public class ShowProfileActivity extends AppCompatActivity {
         }
         shareText += " For additional details, please visit the Dog Finder application.";
 
+        if (profile.getPicture().getUrl() != null){
+            shareText += " Check out an image at " + profile.getPicture().getUrl().toString();
+        }
+
         shareBtn = findViewById(R.id.shareButton);
         shareBtn.setOnClickListener(new View.OnClickListener() {
             /**

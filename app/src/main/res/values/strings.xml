@@ -30,4 +30,5 @@
     <string name="add_profile_btn">Add Profile</string>
     <string name="sign_in_btn">Sign In</string>
     <string name="logo">Dog Finder Logo</string>
+    <string name="dog_profile_title">Dog Profile</string>
 </resources>
